@@ -6,8 +6,10 @@ Radio::Application.routes.draw do
       get 'crop'
     end
   end
-
-
+  get '/users/logout', :to => 'sessions#destroy'
+  match '/auth/:provider/callback', :to => 'sessionsf#create'
+  match '/auth/failure', :to => 'sessionsf#failure'
+  match '/signout', to: 'sessionsf#destroy', as: 'signout'
 get 'tags/:tag', to: 'songs#index', as: :tag
 root :to => 'songs#index'
 end
